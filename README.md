@@ -23,6 +23,7 @@ Output contains the following columns:
 * Amount: The amount bought, sold etc.
 * Amount Currency: The manipulated currency (typically BTC, ETH, ...)
 * Price: 
-* Price Currency: The second currency of the transaction (typically USD, EUR, ...)
 * Fee:
-* Fee Currency: Fee currency should be one of Price Currency or Price Currency. Other values does not make much sense.
+* Price Currency: The second currency of the transaction (typically USD, EUR, ...). Also the currency of the fee
+* Total: `Amount * Price + Fee [* Price]`
+* Total Currency: Same as Price Currency
