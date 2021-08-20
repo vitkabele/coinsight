@@ -17,12 +17,15 @@ def print_stats(df: pd.DataFrame) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Unify the format of crypto exchange logs')
-    parser.add_argument('--input_format', required=True, help='Input format', choices=['bitstamp', 'coinmate'])
-    parser.add_argument('input_file', type=str, help='Input file with data from supported exchange')
+    parser.add_argument('input_file', type=str, help='Input file with data from supported exchange', nargs='+')
     args = parser.parse_args()
 
-    data: pd.DataFrame = eval(f'read_{args.input_format}(args.input_file)')
+    for i in args.input_file:
+        if i.startswith('bitstamp'):
+            data = read_bitstamp(i)
+        elif i.startswith('coinmate'):
+            data = read_coinmate(i)
 
-    print_stats(data)
-    data.pipe(sort_df_cols).to_csv('out.csv', index=False, date_format='%Y-%m-%d %H:%M', decimal=',', sep=';')
-    print("Bye")
+        print_stats(data)
+        data.pipe(sort_df_cols).to_csv(f'{i}.processed.csv', index=False, date_format='%Y-%m-%d %H:%M', decimal=',', sep=';')
+

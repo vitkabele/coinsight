@@ -1,18 +1,20 @@
-# Crypto portfolio analyser
+# coINsight
+
+Get insight on your crypto
 
 Are you investing in crypto? Are you using multiple exchanges? Do you have hard time keeping order in your investments?
 
-If you answeared yes to the questions above, you might be interested in this project.
+If you answered yes to the questions above, you might be interested in this project.
 
 ## What is it 
 
-This project aims to convert exported CSV transaction history to unified format.
+This project is a data transformer of CryptoExchange exported CSV transaction history to unified format.
 Such format can be further analysed, visualised or imported to other tools.
 
 ### Supported input formats
 
-* Bitstamp exported CSV
-* Coinmate exported CSV
+* Bitstamp CSV
+* Coinmate CSV
 
 ### Output format
 

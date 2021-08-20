@@ -3,7 +3,7 @@ import pandas as pd
 
 def read(filename: str) -> pd.DataFrame:
     df = pd.read_csv(filename, header=0, usecols=['Datetime', 'Type', 'Sub Type', 'Amount', 'Value', 'Rate', 'Fee'],
-                     parse_dates=[0], infer_datetime_format=True,
+                     parse_dates=[1], infer_datetime_format=True,
                      converters={'Sub Type': str.upper, 'Type': str.upper}) \
         .rename(columns={'Rate': 'Price', 'Datetime': 'Date'})
     df['Exchange'] = 'BitStamp'
@@ -47,7 +47,9 @@ def fix_types(df: pd.DataFrame) -> pd.DataFrame:
 def calculate_total(df: pd.DataFrame) -> pd.DataFrame:
     """
     The field Total represents the total change to the secondary currency account.
-    When buying it is Spend + Fee, when selling it is Received - Fee
+    When buying it is Spend + Fee, when selling it is Received - Fee.
+    When withdrawal and deposit, the amount is added to the primary account and the fee is subtracted from
+    the secondary. This way the primary "Amount" still represents the value deposited/withdraw
     :param df: Original dataframe
     :return: Modified dataframe
     """
