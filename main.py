@@ -23,10 +23,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     results = []
 
-    for i in args.input_file:
-        if i.startswith('bitstamp'):
+    for i in args.input_files:
+        if i.lower().startswith('bitstamp'):
             data = read_bitstamp(i)
-        elif i.startswith('coinmate'):
+        elif i.lower().startswith('coinmate'):
             data = read_coinmate(i)
         else:
             print(f"Unknown file {i}")
