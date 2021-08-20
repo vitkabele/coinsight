@@ -7,7 +7,7 @@ def read(filename: str) -> pd.DataFrame:
                               'Fee Currency'])
     df['Exchange'] = 'CoinMate'
     df['Type'] = df['Type'].replace({'QUICK_BUY': 'BUY', 'QUICK_SELL': 'SELL'})
-    df1 = df.pipe(fix_types).pipe(normalize_withdrawals).pipe(calculate_total)
+    df1 = df.pipe(fix_types).pipe(normalize_io).pipe(calculate_total)
     return df1
 
 
@@ -18,9 +18,12 @@ def fix_types(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def normalize_withdrawals(df: pd.DataFrame) -> pd.DataFrame:
-    df.loc[df.Type == 'WITHDRAWAL', 'Price Currency'] = df['Amount Currency']
-    df.loc[df.Type == 'WITHDRAWAL', 'Fee Currency'] = df['Amount Currency']
+def normalize_io(df: pd.DataFrame) -> pd.DataFrame:
+    withdrawal_index = df.Type == 'WITHDRAWAL'
+    df.loc[withdrawal_index, 'Price Currency'] = df['Amount Currency']
+    df.loc[withdrawal_index, 'Fee Currency'] = df['Amount Currency']
+
+    df.loc[df.Type == 'DEPOSIT', 'Price Currency'] = df['Amount Currency']
     return df
 
 
