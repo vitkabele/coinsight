@@ -5,11 +5,16 @@ Get insight on your crypto
 Are you investing in crypto? Are you using multiple exchanges? Do you have hard time keeping order in your investments?
 
 If you answered yes to the questions above, you might be interested in this project.
-
-## What is it 
-
-This project is a data transformer of CryptoExchange exported CSV transaction history to unified format.
+It is a data transformer of transaction history exported from different exchanges to unified format.
 Such format can be further analysed, visualised or imported to other tools.
+
+## Usage
+
+1. Download the transaction log from your exchange(s) of choice
+2. Run the `./main.py -O may-june.csv bitstamp-may.csv coinbase-june.csv`. This aggregates the two input files to single output `may-june.csv`.
+The file must be prefixed with the name of exchange. This is how the script decides what parser to use.
+Files may be placed in separate directories named by exchange and then passed as parameters as `bitstamp/*.csv coinbase/*.csv`.
+When the files are named correctly this arrangement enables iteratively adding files i.e. by backing the exchange log each month.
 
 ### Supported input formats
 
