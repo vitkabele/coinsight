@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 from Exchanges.Bitstamp import read as read_bitstamp
 from Exchanges.Coinmate import read as read_coinmate
+from Exchanges.Coinbase import read as read_coinbase
 
 
 def sort_df_cols(df: pd.DataFrame) -> pd.DataFrame:
@@ -28,6 +29,8 @@ if __name__ == "__main__":
             data = read_bitstamp(i)
         elif i.lower().startswith('coinmate'):
             data = read_coinmate(i)
+        elif i.lower().startswith('coinbase'):
+            data = read_coinbase(i)
         else:
             print(f"Unknown file {i}")
             continue

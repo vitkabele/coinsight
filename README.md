@@ -20,11 +20,13 @@ When the files are named correctly this arrangement enables iteratively adding f
 
 * Bitstamp CSV
 * Coinmate CSV
+* Coinbase CSV (file header must be removed manually in advance)
 
 ### Output format
 
 Output contains the following columns:
 
+* Exchange
 * Date: date in the format `%Y-%m-%d %H:%M`, e.g. `2021-08-08 17:24`
 * Type: BUY, SELL, WITHDRAWAL, DEPOSIT
 * Amount: The amount bought, sold etc.
